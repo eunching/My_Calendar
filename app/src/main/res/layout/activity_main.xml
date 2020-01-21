@@ -13,27 +13,17 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <FrameLayout
-            android:id="@+id/frm"
+            android:id="@+id/calendar_place"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </FrameLayout>
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
 
         <Button
             android:id="@+id/UpAndDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="up" />
+            android:text="up"
+            android:onClick="upDownCalendar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

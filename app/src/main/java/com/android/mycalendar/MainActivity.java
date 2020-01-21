@@ -1,26 +1,18 @@
 package com.android.mycalendar;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    Calendar_Fragment calendar_fragment;
+    Login_Fragment login_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +21,18 @@ public class MainActivity extends AppCompatActivity {
 
         final Button UpAndDownBtn = findViewById(R.id.UpAndDown);
         Button.OnClickListener onClickListener = new Button.OnClickListener(){
+
             @Override
             public void onClick(View view){
                 switch (view.getId()) {
                     case R.id.UpAndDown:
                         String buffer = UpAndDownBtn.getText().toString();
                         if(buffer.equals("up")){
+                            //TODO: 버튼 클릭해서 달력 닫고 열기
+                            upDownCalendar(1);
                             UpAndDownBtn.setText("down");
                         }else{
+                            upDownCalendar(2);
                             UpAndDownBtn.setText("up");
                         }
 
@@ -51,10 +47,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void upDownCalendar(int index){
+        if(index == 1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.calendar_place, calendar_fragment);
+        }else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.calendar_place, login_fragment);
+        }
+
+
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.calendar_place, calendar_fragment).commit();
+
         return true;
     }
 
